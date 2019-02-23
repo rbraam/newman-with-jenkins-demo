@@ -5,7 +5,8 @@ createJenkinsJobConfig() {
 }
 
 createJenkinsJob() {
- curl -s -XPOST $JENKINS_HOST'/createItem?name='$1 -u admin:$JENKINS_API_TOKEN --data-binary @jobconfig.xml -H "Content-Type:text/xml" 
+createJenkinsJobConfig
+curl -s -XPOST $JENKINS_HOST'/createItem?name='$1 -u admin:$JENKINS_API_TOKEN --data-binary @jobConfig.xml -H "Content-Type:text/xml" 
 }
 
 
