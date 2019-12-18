@@ -1,4 +1,5 @@
 export JENKINS_HOST=http://localhost:8080
+export JENKINS_API_TOKEN=111f04f7ea252970da37e2790b95b0a976
 
 createJenkinsJobConfig() {
 	sed 's?#CURRENT_PATH?'`pwd`'?' /home/roy/dev/newman-demo/jenkins/defaultJenkinsJobConfig.xml > jobConfig.xml
@@ -6,7 +7,10 @@ createJenkinsJobConfig() {
 
 createJenkinsJob() {
 createJenkinsJobConfig
-curl -s -XPOST $JENKINS_HOST'/createItem?name='$1 -u admin:$JENKINS_API_TOKEN --data-binary @jobConfig.xml -H "Content-Type:text/xml" 
+curl -s -XPOST $JENKINS_HOST'/createItem?name='$1 -u admin:$JENKINS_API_TOKEN --data-binary @jobConfig.xml -H "Content-Type:text/xml"
+rm jobConfig.xml
 }
 
-
+createJenkinsFile() {
+    cp ~/dev/newman-demo/examples/Jenkinsfile ./
+}
